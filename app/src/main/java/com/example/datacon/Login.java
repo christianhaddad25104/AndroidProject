@@ -1,6 +1,5 @@
 package com.example.datacon;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,49 +15,52 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance()
             .getReferenceFromUrl("https://mydata-86e0f-default-rtdb.firebaseio.com/");
 
-    EditText emailInput, passwordInput;
+    EditText UserNameInput, passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
         // Initialize inputs
-        emailInput = findViewById(R.id.emailInput);
+        UserNameInput = findViewById(R.id.UserNameInput);
         passwordInput = findViewById(R.id.passwordInput);
     }
 
     public void loginbtn(View view) {
-        String phoneTxt = emailInput.getText().toString(); // using email field as phone
+        String UsreNameTxt = UserNameInput.getText().toString();
         String passwordTxt = passwordInput.getText().toString();
 
-        if (phoneTxt.isEmpty() || passwordTxt.isEmpty()) {
-            Toast.makeText(MainActivity.this, "Please enter your mobile or password", Toast.LENGTH_SHORT).show();
+        if (UsreNameTxt.isEmpty() || passwordTxt.isEmpty()) {
+            Toast.makeText(Login.this, "Please enter your UserName or password", Toast.LENGTH_SHORT).show();
         } else {
+
             databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.hasChild(phoneTxt)) {
-                        String getPassword = snapshot.child(phoneTxt).child("password").getValue(String.class);
-                        if (getPassword != null && getPassword.equals(passwordTxt)) {
-                            Toast.makeText(MainActivity.this, "Successfully Logged in", Toast.LENGTH_SHORT).show();
+                    if (snapshot.hasChild(UsreNameTxt)) {
+                        String getPassword = snapshot.child(UsreNameTxt).child("Password").getValue(String.class);
+                      if (getPassword != null && getPassword.equals(passwordTxt)) {
+                            Toast.makeText(Login.this, "Successfully Logged in", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(MainActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Wrong password", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(MainActivity.this, "Wrong email", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                    else {
+                        Toast.makeText(Login.this, "Wrong UserName", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(MainActivity.this, "Database error", Toast.LENGTH_SHORT).show();
                 }
             });
         }

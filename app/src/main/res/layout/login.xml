@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Login">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,14 +34,14 @@
                 android:paddingBottom="24dp" />
 
             <EditText
-                android:id="@+id/emailInput"
+                android:id="@+id/UserNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
+                android:layout_marginBottom="12dp"
                 android:background="@android:drawable/edit_text"
-                android:padding="10dp"
-                android:layout_marginBottom="12dp" />
+                android:hint="UserName"
+                android:inputType="textEmailAddress"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/passwordInput"
@@ -64,14 +64,14 @@
                 android:onClick="loginbtn" />
 
             <Button
-                android:id="@+id/btnRegister"
+                android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="REGISTER"
-                android:background="#6200EE"
-                android:textColor="#FFFFFF"
                 android:layout_marginBottom="12dp"
-                android:onClick="registerbtn" />
+                android:background="#6200EE"
+                android:onClick="registerbtn"
+                android:text="SignUp"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
