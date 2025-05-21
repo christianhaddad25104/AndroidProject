@@ -1,5 +1,6 @@
 package com.example.datacon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -48,6 +49,9 @@ public class Login extends AppCompatActivity {
                         String getPassword = snapshot.child(UsreNameTxt).child("Password").getValue(String.class);
                       if (getPassword != null && getPassword.equals(passwordTxt)) {
                             Toast.makeText(Login.this, "Successfully Logged in", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Login.this , HomePage.class);
+                            intent.putExtra("userName", UsreNameTxt);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(Login.this, "Wrong password", Toast.LENGTH_SHORT).show();
                         }
